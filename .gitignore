@@ -1,0 +1,5 @@
+*.o
+
+.idea
+
+io_demo
