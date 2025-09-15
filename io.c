@@ -1,9 +1,7 @@
 
 #include <errno.h>
 #include <unistd.h>
-
 #include "io.h"
-
 #include <string.h>
 
 /* Reads next char from stdin. If no more characters, it returns EOF */
@@ -13,7 +11,7 @@ read_char() {
   size_t nbytes = sizeof(buf);
   ssize_t bytes_read = read(STDIN_FILENO, buf, nbytes);
 
-  //Think this is wrong, it should return EOF without throwing an error?
+  // I think this might be wrong, it should return EOF without throwing an error?
   if (bytes_read > 0) {
     return buf[0];
   }
