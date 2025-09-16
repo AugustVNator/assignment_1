@@ -1,8 +1,6 @@
-
-/* You are not allowed to use <stdio.h> */
 #include "io.h"
 
-
+#include <unistd.h>
 /**
  * @name  main
  * @brief This function is the entry point to your program
@@ -12,9 +10,68 @@
  * Then it has a place for you to implementation the command 
  * interpreter as  specified in the handout.
  */
-int
-main()
-{
+
+typedef struct {
+    int *data;
+    int size;
+    int capacity;
+} Stack;
+
+static void stack_init(Stack *stack){
+    //Måske skal data initialiseres på en anden måde
+    stack->data = NULL;
+    stack->size = 0;
+    stack->capacity = 1;
+}
+
+static void stack_push(Stack *stack) {
+    if (stack->size == stack->capacity) {
+        stack->capacity *= 2;
+    }
+}
+
+static void stack_pop(Stack *stack) {
+    if (stack->size > 0) {
+        stack->size--;
+    }
+}
+
+int main() {
+
+    Stack stack;
+    stack_init(&stack);
+    int count = 0;
+
+    const char msg[] = "\nInput a string:";
+    write(1, msg, sizeof(msg) - 1);
+
+    for (;;) {
+        char cmd = read_char();
+
+        if (cmd == 'a') {
+            stack_push(&stack);
+            // De to linjer under skal måske ud for loppet og ind i stack_push
+            stack.data[stack.size] = count;
+            stack.size == stack.size + 1;
+            count++;
+        } else if (cmd == 'b') {
+            count++;
+        } else if (cmd == 'c') {
+            stack_pop(&stack);
+            count++;
+        } else {
+            write_string("Count: ");
+            write_int(count);
+            write_string("\nCollection: ");
+            for (int i = 0; i < stack.size; ++i) {
+                write_char(stack.data[i]);
+                write_string(", ");
+            }
+        }
+    }
+}
+
+
   /*-----------------------------------------------------------------
    *TODO:  You need to implement the command line driver here as
    *       specified in the assignment handout.
@@ -34,5 +91,3 @@ main()
    *    as a comma delimited series of integers
    *-----------------------------------------------------------------*/
 
-  return 0;
-}
