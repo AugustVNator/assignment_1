@@ -3,11 +3,11 @@
 
 /**
  * The main function uses the various read and write functions defined in io.h
- * as a demonstration to you on how to use it. 
+ * as a demonstration to you on how to use it.
  *
  * It reads in a char from stdin and prints in back out onto
- * stdout while incrementing a counter. Note that the shell will usually 
- * buffer IO until a newline is encountered.  So you may not see output 
+ * stdout while incrementing a counter. Note that the shell will usually
+ * buffer IO until a newline is encountered.  So you may not see output
  * until you press the return or enter key.
  *
  * Entering a 'q' character in the input will cause the function
@@ -20,7 +20,7 @@ main()
   /* Create a counter to count how many bytes we read in */
   int count = 0;
 
-  char * prompt = "Press q then return to quit\n";  
+  char * prompt = "Press q then return to quit\n";
 
   write_string(prompt);
 
@@ -28,7 +28,7 @@ main()
    * We will use the 'q' character as an indicator of when to
    * terminate.  */
   char c;
-  do 
+  do
     {
       c = read_char();
 
