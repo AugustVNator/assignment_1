@@ -68,7 +68,12 @@ void printLinkedList(Node* head) {
     free(temp);
 }
 
-
+int flushInputBuffer() {
+    char buf[1000];
+    size_t nbytes = sizeof(buf);
+    ssize_t bytes_read = read(STDIN_FILENO, buf, nbytes);
+    return 0;
+}
 int main() {
 
     Node *head;
@@ -99,7 +104,10 @@ int main() {
     write_int(count);
     write_string("\nCollection: ");
     printLinkedList(head);
-    
+
+    // Vi sikrer os lige, at inputbufferen ikke påvirker vores terminal
+    flushInputBuffer();
+
     return 0;
 }
 
