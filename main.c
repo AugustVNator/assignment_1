@@ -65,6 +65,7 @@ void printLinkedList(Node* head) {
         }
         temp = temp->next;
     }
+    write_char(';');
     free(temp);
 }
 
@@ -78,8 +79,6 @@ int main() {
 
     Node *head;
     int count = 0;
-
-    write_string("Input a string:\n");
 
     // cmd bliver initialiseret her, så while do-while
     // kan "se" ændringerne
@@ -100,9 +99,6 @@ int main() {
 
     } while (cmd == 'a' || cmd == 'b' || cmd == 'c');
 
-    write_string("Count: ");
-    write_int(count);
-    write_string("\nCollection: ");
     printLinkedList(head);
 
     // Vi sikrer os lige, at inputbufferen ikke påvirker vores terminal
