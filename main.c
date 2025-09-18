@@ -55,10 +55,29 @@ void deleteFromEnd(Node **head) {
     temp->next = NULL;
 }
 
+void atoiAndReverse(int n) {
+    int numbers[100];
+    int i = 0;
+
+    do
+    {
+        numbers[i++] = n % 10;
+        n /= 10;
+    }
+    while (n > 0);
+    for (int j = i-1; j >= 0; j--) {
+        write_int(numbers[j]);
+    }
+}
+
 void printLinkedList(Node *head) {
     Node *temp = head;
     while (temp != NULL) {
-        write_int(temp->data);
+        if (temp->data > 9) {
+            atoiAndReverse(temp->data);
+        } else {
+            write_int(temp->data);
+        }
         //Undgå at skrive komma, hvis kun et tal
         if (temp->next != NULL) {
             write_char(',');
@@ -84,7 +103,8 @@ int main() {
     // kan "se" ændringerne
     char cmd;
 
-    do {
+    do
+    {
         cmd = read_char();
 
         if (cmd == 'a') {
@@ -96,14 +116,15 @@ int main() {
             deleteFromEnd(&head);
             count++;
         }
-    } while (cmd == 'a' || cmd == 'b' || cmd == 'c');
+    }
+    while (cmd == 'a' || cmd == 'b' || cmd == 'c');
 
     printLinkedList(head);
 
 
     // Vi tjekker om cmd er EOF, hvilket ellers ville
     // fryse programmet i flushInputBuffer funktionen
-    if (cmd != EOF) {
+    if (cmd != EOF && cmd != '\n') {
         flushInputBuffer(); // Vi sikrer os, at inputbufferen ikke påvirker vores terminal
     }
 
