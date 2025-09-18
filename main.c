@@ -69,11 +69,12 @@ void printLinkedList(Node* head) {
     free(temp);
 }
 
-int flushInputBuffer() {
+ssize_t flushInputBuffer() {
     char buf[1000];
     size_t nbytes = sizeof(buf);
     ssize_t bytes_read = read(STDIN_FILENO, buf, nbytes);
-    return 0;
+    // Returnér bytes_read for at undgå advarsel for ubrugt variabel
+    return bytes_read;
 }
 int main() {
 
@@ -101,8 +102,12 @@ int main() {
 
     printLinkedList(head);
 
-    // Vi sikrer os lige, at inputbufferen ikke påvirker vores terminal
-    flushInputBuffer();
+
+    // Vi tjekker om cmd er EOF, hvilket ellers ville
+    // fryse programmet i flushInputBuffer funktionen
+    if (cmd != EOF) {
+        flushInputBuffer(); // Vi sikrer os, at inputbufferen ikke påvirker vores terminal
+    }
 
     return 0;
 }
