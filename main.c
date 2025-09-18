@@ -78,7 +78,7 @@ ssize_t flushInputBuffer() {
 }
 
 int main() {
-    Node *head;
+    Node *head = NULL;
     int count = 0;
 
     // cmd bliver initialiseret her, så while do-while
