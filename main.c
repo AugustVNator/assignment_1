@@ -71,8 +71,7 @@ void printLinkedList(Node *head) {
 
 ssize_t flushInputBuffer() {
     char buf[1000];
-    size_t nbytes = sizeof(buf);
-    ssize_t bytes_read = read(STDIN_FILENO, buf, nbytes);
+    ssize_t bytes_read = read(STDIN_FILENO, buf, sizeof(buf));
     // Returnér bytes_read for at undgå advarsel for ubrugt variabel
     return bytes_read;
 }
