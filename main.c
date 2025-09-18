@@ -13,36 +13,36 @@
  * interpreter as  specified in the handout.
  */
 
-typedef struct Node{
+typedef struct Node {
     int data;
     struct Node *next;
-}Node;
+} Node;
 
-Node* createNode(int data) {
-    Node* newNode = malloc(sizeof(Node));
+Node *createNode(int data) {
+    Node *newNode = malloc(sizeof(Node));
     newNode->data = data;
     newNode->next = NULL;
     return newNode;
 }
 
-void insertAtEnd(Node** head, int data) {
-    Node* newNode = createNode(data);
+void insertAtEnd(Node **head, int data) {
+    Node *newNode = createNode(data);
     if (*head == NULL) {
         *head = newNode;
         return;
     }
-    Node* temp = *head;
+    Node *temp = *head;
     while (temp->next != NULL) {
         temp = temp->next;
     }
     temp->next = newNode;
 }
 
-void deleteFromEnd(Node** head) {
+void deleteFromEnd(Node **head) {
     if (*head == NULL) {
         return;
     }
-    Node* temp = *head;
+    Node *temp = *head;
     if (temp->next == NULL) {
         free(temp);
         *head = NULL;
@@ -55,8 +55,8 @@ void deleteFromEnd(Node** head) {
     temp->next = NULL;
 }
 
-void printLinkedList(Node* head) {
-    Node* temp = head;
+void printLinkedList(Node *head) {
+    Node *temp = head;
     while (temp != NULL) {
         write_int(temp->data);
         //Undgå at skrive komma, hvis kun et tal
@@ -76,8 +76,8 @@ ssize_t flushInputBuffer() {
     // Returnér bytes_read for at undgå advarsel for ubrugt variabel
     return bytes_read;
 }
-int main() {
 
+int main() {
     Node *head;
     int count = 0;
 
@@ -97,7 +97,6 @@ int main() {
             deleteFromEnd(&head);
             count++;
         }
-
     } while (cmd == 'a' || cmd == 'b' || cmd == 'c');
 
     printLinkedList(head);
@@ -111,5 +110,3 @@ int main() {
 
     return 0;
 }
-
-
