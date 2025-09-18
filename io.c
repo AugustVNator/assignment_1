@@ -7,8 +7,7 @@
 int
 read_char() {
     char buf[1];
-    size_t nbytes = sizeof(buf);
-    ssize_t bytes_read = read(STDIN_FILENO, buf, nbytes);
+    ssize_t bytes_read = read(STDIN_FILENO, buf, sizeof(buf));
 
     // I think this might be wrong, it should return EOF without throwing an error?
     if (bytes_read > 0) {
@@ -20,10 +19,9 @@ read_char() {
 /* Writes c to stdout.  If no errors occur, it returns 0, otherwise EOF */
 int
 write_char(char c) {
-    size_t nbytes = sizeof(c);
-    ssize_t bytes_write = write(STDOUT_FILENO, &c, nbytes);
+    ssize_t bytes_write = write(STDOUT_FILENO, &c, sizeof(c));
 
-    if (bytes_write) {
+    if (bytes_write > 0) {
         return 0;
     }
     return EOF;
@@ -32,11 +30,9 @@ write_char(char c) {
 /* Writes a null-terminated string to stdout.  If no errors occur, it returns 0, otherwise EOF */
 int
 write_string(char *s) {
-    size_t nbytes = strlen(s);
+    ssize_t bytes_write = write(STDOUT_FILENO, s, strlen(s));
 
-    ssize_t bytes_write = write(STDOUT_FILENO, s, nbytes);
-
-    if (bytes_write) {
+    if (bytes_write > 0) {
         return 0;
     }
     return EOF;
@@ -49,10 +45,10 @@ int
 write_int(int n) {
     char convertedInt = n + '0';
     char *pCI = &convertedInt;
-    size_t nbytes = sizeof(convertedInt);
-    ssize_t bytes_write = write(STDOUT_FILENO, pCI, nbytes);
 
-    if (bytes_write) {
+    ssize_t bytes_write = write(STDOUT_FILENO, pCI, sizeof(convertedInt));
+
+    if (bytes_write > 0) {
         return 0;
     }
     return EOF;
