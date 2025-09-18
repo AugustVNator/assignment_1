@@ -55,7 +55,7 @@ void deleteFromEnd(Node **head) {
     temp->next = NULL;
 }
 
-void atoiAndReverse(int n) {
+void itoaAndReverse(int n) {
     int numbers[100];
     int i = 0;
 
@@ -74,7 +74,7 @@ void printLinkedList(Node *head) {
     Node *temp = head;
     while (temp != NULL) {
         if (temp->data > 9) {
-            atoiAndReverse(temp->data);
+            itoaAndReverse(temp->data);
         } else {
             write_int(temp->data);
         }
